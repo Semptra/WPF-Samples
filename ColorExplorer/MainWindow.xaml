@@ -1,0 +1,103 @@
+﻿<Window x:Class="ColorExplorer.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ColorExplorer"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        mc:Ignorable="d"
+        Title="Color Explorer" Height="450" Width="800">
+
+    <Window.Resources>
+        <ObjectDataProvider x:Key="ColorDataSource" ObjectType="{x:Type local:RGBInput}">
+            <ObjectDataProvider.ConstructorParameters>
+                <system:Byte>0</system:Byte>
+                <system:Byte>0</system:Byte>
+                <system:Byte>0</system:Byte>
+            </ObjectDataProvider.ConstructorParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
+    
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid DataContext="{Binding rgbInput}">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="Auto"></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="5,0">Red</Label>
+                
+                <TextBox x:Name="RedInputTextBox" 
+                         Text="{Binding Source={StaticResource ColorDataSource}, Path=Red, Mode=TwoWay}" 
+                         VerticalAlignment="Center" 
+                         TextAlignment="Center" 
+                         MinWidth="30" 
+                         Margin="5,0" />
+                
+                <Slider x:Name="RedInputSlider" 
+                        Value="{Binding Source={StaticResource ColorDataSource}, Path=Red, Mode=TwoWay}" 
+                        Minimum="0" 
+                        Maximum="255" 
+                        MinWidth="150" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="1" Orientation="Horizontal">
+                <Label Margin="5,0">Green</Label>
+                
+                <TextBox x:Name="GreenInputTextBox" 
+                         Text="{Binding Source={StaticResource ColorDataSource}, Path=Green, Mode=TwoWay}" 
+                         VerticalAlignment="Center" 
+                         TextAlignment="Center" 
+                         MinWidth="30" 
+                         Margin="5,0" />
+                
+                <Slider x:Name="GreenInputSlider"
+                        Value="{Binding Source={StaticResource ColorDataSource}, Path=Green, Mode=TwoWay}" 
+                        Minimum="0" 
+                        Maximum="255" 
+                        MinWidth="150" 
+                        VerticalAlignment="Center" 
+                        Margin="5,0" />
+            </StackPanel>
+
+            <StackPanel Grid.Column="2" Orientation="Horizontal">
+                <Label Margin="5,0">Blue</Label>
+                
+                <TextBox x:Name="BlueInputTextBox" 
+                         Text="{Binding Source={StaticResource ColorDataSource}, Path=Blue, Mode=TwoWay}" 
+                         VerticalAlignment="Center" 
+                         TextAlignment="Center"
+                         MinWidth="30"
+                         Margin="5,0"/>
+                
+                <Slider x:Name="BlueInputSlider" 
+                        Value="{Binding Source={StaticResource ColorDataSource}, Path=Blue, Mode=TwoWay}" 
+                        Minimum="0" 
+                        Maximum="255"
+                        MinWidth="150" 
+                        VerticalAlignment="Center"
+                        Margin="5,0" />
+            </StackPanel>
+
+            <Button x:Name="RandomButton" 
+                    Grid.Column="3" 
+                    Margin="5,0" 
+                    Padding="5,0"
+                    MinWidth="50"
+                    Content="Start"
+                    Click="RandomButton_Click"/>
+        </Grid>
+
+        <Border Grid.Row="1" Background="{Binding Source={StaticResource ColorDataSource}, Path=Color, Mode=TwoWay}" />
+    </Grid>
+</Window>
